@@ -1,0 +1,12 @@
+
+source:
+  type: datahub-business-glossary
+  config:
+    file: /home/ec2-user/environment/business_glossary.yml    
+    
+
+sink:
+  type: datahub-rest 
+  config:
+    server: '${GMS_ENDPOINT}'
+    token:  '${GMS_TOKEN}'

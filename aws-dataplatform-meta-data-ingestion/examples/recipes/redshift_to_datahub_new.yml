@@ -1,0 +1,17 @@
+
+source:
+    type: redshift
+    config:
+        host_port: '<redshift-host>:5439'
+        database: dev
+        username: '${REDSHIFT_USERNAME}'
+        password: '${REDSHIFT_PASSWORD}'
+        include_tables: true
+        include_views: true
+        profiling:
+            enabled: false
+sink:
+    type: datahub-rest
+    config:
+        server: '${GMS_ENDPOINT}'
+        token:  '${GMS_TOKEN}'
