@@ -1,7 +1,8 @@
 # Deploy DataHub using AWS managed services and ingest metadata from AWS Glue and Amazon Redshift
-Here you can find the AWS Big Data Blog that is part of this code base .
+Here you can find two part series of the AWS Big Data Blog that is part of this code base.
 
 [Part 1](https://aws.amazon.com/blogs/big-data/part-1-deploy-datahub-using-aws-managed-services-and-ingest-metadata-from-aws-glue-and-amazon-redshift/)
+
 [Part 2](https://aws.amazon.com/blogs/big-data/part-2-deploy-datahub-using-aws-managed-services-and-ingest-metadata-from-aws-glue-and-amazon-redshift/)
 
 
