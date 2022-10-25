@@ -1,3 +1,10 @@
+# Deploy DataHub using AWS managed services and ingest metadata from AWS Glue and Amazon Redshift
+Here you can find the AWS Big Data Blog that is part of this code base .
+
+[Part 1](https://aws.amazon.com/blogs/big-data/part-1-deploy-datahub-using-aws-managed-services-and-ingest-metadata-from-aws-glue-and-amazon-redshift/)
+[Part 2](https://aws.amazon.com/blogs/big-data/part-2-deploy-datahub-using-aws-managed-services-and-ingest-metadata-from-aws-glue-and-amazon-redshift/)
+
+
 # Section A :  Prerequisites​
 
 We need kubectl,helm and AWS CLI to complete the setup of DataHub in AWS environment. We can execute all the instructions either from local desktop or using AWS Cloud9. If you are using AWS Cloud9 please follow below instruction to spin up AWS Cloud9 or 
