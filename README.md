@@ -91,7 +91,7 @@ aws iam create-service-linked-role --aws-service-name opensearchservice.amazonaw
 npm install -g aws-cdk@latest
 ```
 
-*** In the case of errror try to force it ***
+*** In the case of error try to force it ***
 ```
 npm install -g aws-cdk@latest --force
 ```
@@ -173,16 +173,16 @@ get the kubectl updateconfig command from EKS stack CfnOutput
   aws eks update-kubeconfig --region region-code --name cluster-name --role-arn
 ```
 
-### Navigate to "Secrets Manager" and find the secret with name "MySqlInstancedatahubSecret****" and click "Retrive secret value" button from "Secret value" section to get following
+### Navigate to "Secrets Manager" and find the secret with name "MySqlInstancedatahubSecret****" and click "Retrieve secret value" button from "Secret value" section to get following
     password <pwd>
 	dbname db1
 	engine mysql
 	port 3306
-	dbInstanceIdentifier <identfier-name>
+	dbInstanceIdentifier <identifier-name>
 	host <host>
 	username admin
 
-### Navigate to "ES/OpenSearch" CFN Stack and get the following detials from its output
+### Navigate to "ES/OpenSearch" CFN Stack and get the following details from its output
 		MasterPW <pwd>	
 		MasterUser opensearch
 
@@ -191,21 +191,21 @@ get the kubectl updateconfig command from EKS stack CfnOutput
 		vpc-opensearch-domain-datahub-<id>.<region>.es.amazonaws.com
 
 ### Navigate to MSK Service in AWS console and click your cluster i.e. "MSK-datahub"
-     Copy the Zookeeper "Planintext" connection Url
-     Copy the borker "Planintext" Connection Url 
+     Copy the Zookeeper "Plaintext" connection Url
+     Copy the broker "Plaintext" Connection Url 
       
 
 # Section D:  installing datahub containers to provisioned EKS cluster
    
-    1- create K8S secerets
+    1- create K8S secrets
     2- Change two config files to add the service information
     3- Helm deploy
     4- Expose endpoints using a load balancer​ [Optional]
 
 
-## 1 - create K8S secerets
+## 1 - create K8S secrets
 
-### Assuming kubectl context points to the correct kubernetes cluster, first create kubernetes secrets that contain MySQL and Elastics Serach passwords.
+### Assuming kubectl context points to the correct kubernetes cluster, first create kubernetes secrets that contain MySQL and Elasticsearch passwords.
 
 ```
 kubectl create secret generic mysql-secrets --from-literal=mysql-root-password=<replace here>
@@ -248,7 +248,7 @@ Note: If you want to use newer [helm chart](https://github.com/acryldata/datahub
 •	global :sql
 
 
-### If installion failed, the debug with below commands to check the status of EKS cluster pods
+### If installation failed, the debug with below commands to check the status of EKS cluster pods
 ### Confirm kubectl points to the EKS cluster: 
 ```			
 kubectl config current-context
@@ -294,7 +294,7 @@ helm history
 
 ## 4- Expose endpoints using a load balancer [Optional]​
 
-### IRSA -  I am role for service account 
+### IRSA - IAM role for service account 
 https://docs.aws.amazon.com/eks/latest/userguide/create-service-account-iam-policy-and-role.html
 
 
@@ -355,7 +355,7 @@ https://datahubproject.io/docs/deploy/aws
 
 ###  Update default password for Superadmin user "datahub"[optional]
 Create a file /tmp/user.props
-Add a single line with user:passwod E.g:  datahub:<password>
+Add a single line with user:password E.g:  datahub:<password>
 
 ```
 kubectl create secret generic datahub-users --from-file=user.props=/tmp/user.props 
