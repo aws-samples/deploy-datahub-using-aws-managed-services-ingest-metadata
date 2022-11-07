@@ -175,7 +175,7 @@ global:
 
   sql:
     datasource:
-      host: "<MY-SQL-HOST"
+      host: "<MY-SQL-HOST:3306>"
       hostForMysqlClient: "MY-SQL-HOST"
       port: "3306"
       url: "jdbc:mysql://MY-SQL-HOST:3306/datahub?verifyServerCertificate=false&useSSL=true&useUnicode=yes&characterEncoding=UTF-8&enabledTLSProtocols=TLSv1.2"
