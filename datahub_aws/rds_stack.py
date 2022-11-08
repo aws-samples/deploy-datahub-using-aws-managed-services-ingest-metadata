@@ -28,7 +28,7 @@ class MySql(Stack):
         )
        
         if not instance_type:
-            instance_type = ec2.InstanceType.of(ec2.InstanceClass.MEMORY4, ec2.InstanceSize.LARGE)
+            instance_type = ec2.InstanceType.of(ec2.InstanceClass.MEMORY5, ec2.InstanceSize.LARGE)
 
         if not engine_version:
             engine_version = rds.MysqlEngineVersion.VER_8_0_26
