@@ -13,7 +13,23 @@ datahub-frontend:
     tag: "v0.8.45"
   # Set up ingress to expose react front-end
   ingress:
-    enabled: false
+    enabled: false    # set to true if you want to create ingress
+    annotations:
+      kubernetes.io/ingress.class: alb
+      alb.ingress.kubernetes.io/scheme: internet-facing
+      alb.ingress.kubernetes.io/target-type: instance
+      alb.ingress.kubernetes.io/certificate-arn: <ARN of Cert from CERT_MANAGER (can buy domain name from GoDaddy>
+      alb.ingress.kubernetes.io/inbound-cidrs: 0.0.0.0/0
+      alb.ingress.kubernetes.io/listen-ports: '[{"HTTP": 80}, {"HTTPS":443}]'
+      alb.ingress.kubernetes.io/ssl-redirect: '443'
+      # alb.ingress.kubernetes.io/actions.ssl-redirect: '{"Type": "redirect", "RedirectConfig": { "Protocol": "HTTPS", "Port": "443", "StatusCode": "HTTP_301"}}'
+      hosts:
+        - paths:
+            - /*
+#          host: subdomain.your.domain     # Enable it ONLY if you want to use Domain name (match to cert above) to access, instead of ALB
+          backend:
+            serviceName: datahub-datahub-frontend
+            servicePort: 9002
 
 acryl-datahub-actions:
   enabled: true
@@ -156,6 +172,8 @@ global:
     zookeeper:
       server: "ZK_Host"
     ## For AWS MSK set this to a number larger than 1
+    ## Added @20221109, there is a bug here, to enable multiple partitions will lead to GMS unhealthy
+    ## And results in unable to create TOKEN/Glossary
     # partitions: 3
     # replicationFactor: 3
     schemaregistry:
