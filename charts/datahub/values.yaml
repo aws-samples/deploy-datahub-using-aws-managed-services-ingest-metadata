@@ -13,7 +13,7 @@ datahub-frontend:
     tag: "v0.8.45"
   # Set up ingress to expose react front-end
   ingress:
-    enabled: false    # set to true if you want to create ingress
+    enabled: true    # set to true if you want to create ingress
     annotations:
       kubernetes.io/ingress.class: alb
       alb.ingress.kubernetes.io/scheme: internet-facing

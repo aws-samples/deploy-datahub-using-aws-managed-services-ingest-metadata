@@ -270,6 +270,65 @@ kubectl get pods
 kubectl logs -f <error-pod-name>
 ``` 
 
+### [Optional - Applicable If using Application LB/Ingress # Step One]
+#### Use LetsEncrypt to generate Cert/Pem
+```
+# Example on MacBook - Reference https://hackmylinux.com/2021/12/27/create-free-ssl-certificates-on-macos-using-lets-encrypt/
+# Step A - Install certbot
+brew install certbot
+
+# Step B - create CERT (assume will utilize Route53 for domain propagation)
+# you will need to input information (including ur domain)
+cd <a-folder-holding-your-cert-and-pem>
+certbot certonly --preferred-challenges=dns --manual --config-dir `pwd` --work-dir `pwd` --logs-dir `pwd`
+
+# Step C - There will prompt a long string for you to add to GoDaddy console - which to verify you are the owner of the cert/domain
+           Here, !!! PLEASE HOLD ON!!! the string needs to be insert into Step two below and wait for several minutes before moving forward(for propagation) 
+
+# [Optional - for Renew only]
+# certbot certonly --preferred-challenges=dns --force-renewal -d <your.domain> --manual --config-dir `pwd` --work-dir `pwd` --logs-dir `pwd`
+
+# Step D - Review pem/cert/chain
+# After process done, the pem/cert/chain will be under folder `live/<your-domain>/`
+
+```
+### [Optional - Applicable If using Application LB/Ingress # Step Two]
+#### Configure Route53 for Domain propagation
+```
+    Step A - Go to Route53 -> Hosted zones, create a hosted zone.
+             "Domain Name" : your domain (bought from GoDaddy or somewhere else)
+             "Description" : [optional]
+             "Type"        : "Public hosted zone"
+             
+             Click "Create hosted zone"
+    
+    Step B - Click the hosted zone you just created,
+            a) click "Create Record"
+            b) "Record name" : "_acme-challenge"  # no quote, from Step C of Step One (above section) 
+               "Record Type" : TXT
+               "Value"       : "<value from Step C of Step One (above section) >"
+            c) click "Create Records"
+
+```
+
+### [Optional - Applicable If using Application LB/Ingress # Step Three]
+#### Configure HOST for ALB
+```
+    # This step needs to go after "ALB installed to EKS" below
+    Step A - Go to Route53 -> Click the hosted zone you just created (from Step two)
+            a) click "Create Record"
+            b) "Record name"         : "<whatever you want to name as subdomain>" 
+               "Record Type"         : A
+               "Alias"               : Radio button, turn on
+               "Route Traffic to"    : "Alias to Application and Classic Load Balancer"
+               "Choose Region"       : <Region in use>
+               "Choose Load Balancer": dualstack.<xxx>.<region>.elb.amazonaws.com
+            c) click "Create Records"
+
+    Step B - Wait several minutes for activation
+```
+
+
 ### After identifying issue from above log and fixing manually, try to setup DataHub with following Upgrade command
 ### For updating the helm chart
   ```
