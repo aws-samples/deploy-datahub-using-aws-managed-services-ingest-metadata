@@ -1,0 +1,46 @@
+# Default configuration for pre-requisites to get you started
+# Copy this file and update to the configuration of choice
+elasticsearch:
+  enabled: false
+
+opensearch:
+  enabled: false
+
+neo4j:
+  enabled: false
+
+mysql:
+  enabled: false
+
+postgresql:
+  enabled: false
+
+gcloud-sqlproxy:
+  enabled: false
+
+cp-helm-charts:
+  enabled: true
+  # Schema registry is under the community license
+  cp-schema-registry:
+    enabled: true
+    kafka:
+      # <<release-name>>-kafka:9092
+      # bootstrapServers: "prerequisites-kafka:9092"
+      bootstrapServers: "b-1.xxx.kafka.region.amazonaws.com:9092,b-2.xxx.kafka.region.amazonaws.com:9092"
+  cp-kafka:
+    enabled: false
+  cp-zookeeper:
+    enabled: false
+  cp-kafka-rest:
+    enabled: false
+  cp-kafka-connect:
+    enabled: false
+  cp-ksql-server:
+    enabled: false
+  cp-control-center:
+    enabled: false
+
+kafka:
+  enabled: false
+
+

@@ -1,4 +1,5 @@
-
+# download Dependent JAR: acryl-spark-lineage instead of datahub-spark-lineage
+# https://search.maven.org/artifact/io.acryl/acryl-spark-lineage/
 import sys
 from awsglue.transforms import *
 from awsglue.utils import getResolvedOptions
